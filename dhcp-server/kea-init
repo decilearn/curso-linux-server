@@ -1,0 +1,40 @@
+{
+"Dhcp4": {
+    "interfaces-config": {
+        "interfaces": ["ens160"]
+    },
+
+    "valid-lifetime": 28800,
+    "renew-timer": 14400,
+    "rebind-timer": 25200,   
+
+    "lease-database": {
+        "type": "memfile",
+        "persist": true,
+        "name": "/var/lib/kea/dhcp4.csv",
+        "lfc-interval": 3600
+    },
+
+    "subnet4": [
+        {
+            "subnet": "172.16.1.0/24",
+            "id":100,
+            "pools": [ { "pool": "172.16.1.100 - 172.16.1.199" } ],
+            "option-data": [
+                {
+                    "name": "routers",
+                    "data": "172.16.1.254"
+                },
+                {
+                    "name": "domain-name-servers",
+                    "data": "172.16.0.10, 172.16.0.11"
+                },
+                {
+                    "name": "domain-search",
+                    "data": "linux.lan"
+                }
+            ]             
+        }  
+    ]
+}
+}
